@@ -18,6 +18,7 @@
 \usepackage{xcolor}
 % Math
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{gensymb}
 % Graphics
 \usepackage{graphicx}
 \usepackage{forest}
@@ -104,5 +105,61 @@
     \item[$\square$] Ýmis atriði í tölvugrafík (Homogeneous hnit) (þríhyrnaröðun)(Skuggakort)
     \item[$\square$] Aukaverkefni (Geislasmölun vs Phong) (Dofnun og birtustýring)
 \end{itemize}
+
+\newpage
+
+\section{Mín lausn við prófinu 2023}
+
+\subsection{Varpanir}
+\subsubsection{a.} Á myndinni er gefin upphafsstaða á húsi í tvívídd. Neðra vinstra horn þess er i (1, 2).
+
+\includegraphics[scale = 0.9]{mynd2023a.png}
+
+Teiknið mynd af stöðu hússins eftir þessar samsettu varpanir (hvor liður sjálfstæður). Rökstyðjið í nokkrum orðum hver útkoman er.
+
+\begin{itemize}
+    \item[i.] $T(1, 2)*S(1, 2)*T(2,-1)*R(90\degree)$
+    \item[ii.] $T(1, 2)*R(90\degree)*S(1,2)*T(-1,-2)$
+\end{itemize}
+
+\subsubsection{b.} Sýnið samsetta tvívíða vörpun sem breytir ferningnum í fyrri myndinni yfir í
+ferhyrninginn í seinni myndinni. Seinni ferhyrningurinn er með miðpunkt (2,
+2), hliðarlengdir 1 og 2, og halli hans er $45\degree$. Rökstyðjið einstakar
+grunnvarpanir í samsettu vörpuninni.
+
+\includegraphics[scale = 0.9]{mynd2023b.png}
+
+\newpage
+
+\subsection{2} WebGl Útfærsla á líkani
+
+Það er til útgáfa af klukku (Continue Time, hönnuður Sander Mulder) sem hefur
+þrjá arma eins og venjuleg klukka, en í stað þess að armarnir
+snúist allir um sama punkt (þ.e. miðpunkt skífu), þá eru þeir
+festir á endann á öðrum armi. Klukkustundararmurinn er
+reyndar festur á miðpunkt skífu og snýst um hann eins og á
+venjulegri klukku, en mínútuarmurinn er festur á endann á
+klukkustundararminum og snýst um þann punkt. Sömuleiðis
+er sekúntuarmurinn festur á endann á mínútuarminum og
+snýst um hann. Á myndinni hér til hliðar er
+klukkustundararmurinn á milli 4 og 5, mínútuarmurinn sýnir
+30 og sekúntuarmurinn vísar á 45. Klukkan hér er því
+4:30:45.
+
+\includegraphics[scale = 0.9]{klukka.png}
+
+Sýnið uppkast að render-falli sem teiknar þessa klukku. Hver armur á að vera
+teningur og þið getið gert ráð fyrir að sé búið að hlaða hnúta hans inn í
+grafíkminni. Vísarnir eiga að liggja í xy-sléttunni og þeir eiga að snúast rétt,
+þannig að fyrir hvern heilan hring sekúntuarmsins snýst mínútuarmurinn sem
+svarar einni mínútu (þ.e. 1/60 af heilum hring). Samsvarandi gildir með
+klukkustundararminn. Þið eigið bara að uppfæra sekúntuarminn um eina sekúntu í
+hverri ítrun render-fallsins (og hina armana samsvarandi). Þetta gefur auðvitað
+ekki réttan tíma, en sýnir hreyfingu klukkunnar.
+Einbeitið ykkur að því að sýna varpanirnar og teikniföllin í render-fallinu. Þetta
+þarf ekki að vera alveg keyranlegur kóði, heldur skiptir meira máli að þið séuð að
+hugsa varpanirnar rétt. Útskýrið þess vegna vel einstakar skipanir.
+
+\newpage
 
 \end{document}
