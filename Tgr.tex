@@ -199,6 +199,8 @@ Teiknið mynd af stöðu hússins eftir þessar samsettu varpanir (hvor liður s
     \end{tikzpicture}
 \end{itemize}
 
+\newpage
+
 \subsubsection{b.} Sýnið samsetta tvívíða vörpun sem breytir ferningnum í fyrri myndinni yfir í
 ferhyrninginn í seinni myndinni. Seinni ferhyrningurinn er með miðpunkt (2,
 2), hliðarlengdir 1 og 2, og halli hans er $45\degree$. Rökstyðjið einstakar
@@ -236,6 +238,75 @@ ekki réttan tíma, en sýnir hreyfingu klukkunnar.
 Einbeitið ykkur að því að sýna varpanirnar og teikniföllin í render-fallinu. Þetta
 þarf ekki að vera alveg keyranlegur kóði, heldur skiptir meira máli að þið séuð að
 hugsa varpanirnar rétt. Útskýrið þess vegna vel einstakar skipanir.
+
+
+\textbf{Svar}:
+\begin{lstlisting}
+function render()
+{
+    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    var proj = perspective( 70.0, 1.0, 0.2, 10.0 );
+    gl.uniformMatrix4fv(proLoc, false, flatten(proj));
+    
+    var mv = lookAt( vec3(0.0, 0.0, zDist), vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0) );
+    mv = mult( mv, rotateX( spinX ) );
+    mv = mult( mv, rotateY( spinY ) );
+    
+    // Ba til bakgrunn fyrir klukku
+    mvb = mult( mv, translate( 0.0, 0.0, -0.04 ) );
+    mvb = mult( mvb, rotateY( 180.0 ) );
+    mvb = mult( mvb, scalem( 1.25, 1.25, 0.01 ) );
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvb));
+    gl.drawArrays( gl.TRIANGLES, 0, NumVertices );
+    
+
+
+    sek += sekupph;
+    sekvisir = 6*sek;
+    minvisir = 0.1*sek;
+    kstvisir = 0.1*sek/11.0;
+
+
+    // ---------- Klukkustundavísir
+    mv = mult( mv, rotateZ( -kstvisir ) );              // Sna samkvmt breytingu  tma
+    
+     // Líkanavörpun klukkustundavisis
+    mvk = mult( mv, translate( 0.0, 0.1, 0.0 ) );       // Hlira upp, svo neri endi  (0, 0, 0)
+    mvk = mult( mvk, scalem( 0.025, 0.2, 0.025 ) );       // Setja  rtta str
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvk));
+    gl.drawArrays( gl.TRIANGLES, 0, NumVertices );
+
+
+    // ---------- Mínútuvísir
+    mv = mult( mv, translate( 0.0, 0.2, 0.0 ) );        // Fra t  enda klukkustundavsis
+    mv = mult( mv, rotateZ( -minvisir ) );              // Sna samkvmt breytingu  tma
+    
+     // Lkanavrpun mntuvsis
+    mvm = mult( mv, translate( 0.0, 0.1, 0.0 ) );       // Hlira upp, svo neri endi  (0, 0, 0)
+    mvm = mult( mvm, scalem( 0.02, 0.2, 0.02 ) );       // Setja  rtta str
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvm));
+    gl.drawArrays( gl.TRIANGLES, 0, NumVertices );
+
+    
+    // ----------- Seknduvsir
+    mv = mult( mv, translate( 0.0, 0.2, 0.0 ) );        // Fra t  enda mntuvsis
+    mv = mult( mv, rotateZ( -sekvisir ) );              // Sna samkvmt breytingu  tma
+    
+     // Lkanavrpun seknduvsis
+    mvs = mult( mv, translate( 0.0, 0.1, 0.0 ) );       // Hlira upp, svo neri endi  (0, 0, 0)
+    mvs = mult( mvs, scalem( 0.015, 0.2, 0.015 ) );       // Setja  rtta str
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvs));
+    gl.drawArrays( gl.TRIANGLES, 0, NumVertices );
+
+
+    requestAnimFrame(render);
+}
+
+\end{lstlisting}
 
 \newpage
 
